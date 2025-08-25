@@ -1,7 +1,7 @@
 const App = () => {
   return (
     <div>
-      <h2>Hello, This is Swadeshi Jagran Application</h2>
+      <h2>Hello, This is Swadeshi Jagran</h2>
     </div>
   );
 };
