@@ -1,9 +1,9 @@
-import React from 'react'
-
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+      <h2>Hello, This is Swadeshi Jagran Application</h2>
+    </div>
+  );
+};
 
-export default App
+export default App;
