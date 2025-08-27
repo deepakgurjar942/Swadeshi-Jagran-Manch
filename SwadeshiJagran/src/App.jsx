@@ -1,7 +1,9 @@
+import AppRoutes from "./routes/AppRoutes";
+
 const App = () => {
   return (
     <div>
-      <h2>Hello, This is Swadeshi Jagran</h2>
+      <AppRoutes/>
     </div>
   );
 };
