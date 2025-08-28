@@ -1,7 +1,7 @@
 // src/layouts/Navbar.js
 import React, { useEffect, useState } from "react";
 import { FaBars, FaFacebook, FaInstagram, FaLinkedin, FaTimes, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AboutDropdown from "../components/AboutDropdown.jsx";
 import ResourcesDropdown from "../components/ResourcesDropdown";
 import StandOnIssueDropdown from "../components/StandOnIssueDropdown";
@@ -13,7 +13,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-
+  const location= useLocation();
+  const isHomePage = location.pathname==="/home";
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -49,7 +50,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 
-        ${scrolled ? "bg-black" : "bg-transparent"} hover:bg-black`}
+        ${isHomePage && !scrolled ? 'bg-transparent' : 'bg-black'}  hover:bg-black `} 
     >
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Row - Logo and Social Icons */}
