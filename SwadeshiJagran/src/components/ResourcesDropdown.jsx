@@ -32,49 +32,49 @@ const ResourcesDropdown = () => {
       >
         <div className="py-1">
           <Link
-            to="/resource-center/national-events"
+            to="/category/national-events"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             National Events
           </Link>
           <Link
-            to="/resource-center/swavlambi-bharat-abhiyan"
+            to="/category/sb-abhiyan"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Swavlambi Bharat Abhiyan
           </Link>
           <Link
-            to="/resource-center/resolution"
+            to="/category/resolution"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
               Resolution
           </Link>
           <Link
-            to="/resource-center/press-releases"
+            to="/category/press-releases"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Press Releases
           </Link>
            <Link
-            to="/resource-center/news-wire"
+            to="/category/news-wire"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             News Wire
           </Link>
            <Link
-            to="/resource-center/articles-by-author"
+            to="/allpost"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Articles By Author
           </Link> 
           <Link
-            to="/resource-center/editorial"
+            to="/category/editorial"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >

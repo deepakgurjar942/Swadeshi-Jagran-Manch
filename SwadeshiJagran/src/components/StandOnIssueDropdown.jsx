@@ -32,49 +32,49 @@ const StandOnIssue = () => {
       >
         <div className="py-1">
           <Link
-            to="/stand-on-issue/education"
+            to="/category/education"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Education
           </Link>
           <Link
-            to="/stand-on-issue/environment"
+            to="/category/environment"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Environment
           </Link>
           <Link
-            to="/stand-on-issue/agriculture"
+            to="/category/agriculture"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Agriculture
           </Link>
           <Link
-            to="/stand-on-issue/retail-trade"
+            to="/category/retail-trade"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Retail Trade
           </Link>
           <Link
-            to="/stand-on-issue/gm-debate"
+            to="/category/gm-debate"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             GM Debate
           </Link>
           <Link
-            to="/stand-on-issue/ipr"
+            to="/category/ipr"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             IPR
           </Link> 
           <Link
-            to="/stand-on-issue/food"
+            to="/category/food"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >

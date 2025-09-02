@@ -1,179 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
+import { categories } from '../services/categories';
+import { recentNews } from '../services/recentNews';
+import { popularNews } from '../services/popularNews';
+import { slides} from '../services/slides';
+import { agriculture } from '../services/agriculture';
+import { gmDebate } from '../services/gmDebate';
+import { destinations } from '../services/destinations';
+
 import Footer from "../layouts/Footer";
-const Pormarth = () => {
+const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentDestination, setCurrentDestination] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showPlayButton, setShowPlayButton] = useState(true);
 
-  const recentNews = [
-    {
-      title: "कहानी भारतीय समोसे और जलेबी की",
-      img: "https://www.swadeshionline.in/assets/uploads/news-1779.jpeg",
-    },
-    {
-      title: "भारत बना दुनिया का चौथा सबसे अधिक समानता वाला देश",
-      img: "https://www.swadeshionline.in/assets/uploads/news-1778.jpg",
-    },
-    {
-      title: "स्वदेशी सैन्य तकनीकी और नवाचार",
-      img: "https://www.swadeshionline.in/assets/uploads/news-1777.jpg",
-    },
-  ];
-
-  const popularNews = [
-    {
-      title: "वर्तमान दौर में संयुक्त राष्ट्र संघ की प्रासंगिकता",
-      img: "https://www.swadeshionline.in/assets/uploads/news-343.jpg",
-    },
-    {
-      title: "स्वावलंबी भारत अभियान",
-      img: "https://www.swadeshionline.in/assets/uploads/news-858.jpg",
-    },
-    {
-      title: "कोई सपना नहीं, हकीकत है आत्मनिर्भर-भारत",
-      img: "https://www.swadeshionline.in/assets/uploads/news-239.jpg",
-    },
-  ];
-
-  const categories = [
-    {
-      title: "Education",
-      img: "https://www.swadeshionline.in/assets/uploads/news-1225.jpg",
-    },
-    {
-      title: "Environment",
-      img: "https://www.swadeshionline.in/assets/uploads/news-884.jpg",
-    },
-    {
-      title: "GM Food",
-      img: "https://www.swadeshionline.in/assets/uploads/news-373.jpg",
-    },
-    {
-      title: "National Events",
-      img: "https://www.swadeshionline.in/assets/uploads/news-1047.jpg",
-    },
-    {
-      title: "Movements",
-      img: "https://media.newindianexpress.com/newindianexpress%2F2025-08-10%2Fc7cmtvug%2F20250810194240.jpg?w=1200&auto=format%2Ccompress&fit=max",
-    },
-    {
-      title: "Tourist Guide",
-      img: "https://img.freepik.com/free-photo/couple-tourists-searching-some-entertainments_329181-13762.jpg?t=st=1756290231~exp=1756293831~hmac=283baa2583196bf4bacc648da250fd36aece8e7b80ceff8b5b0a604e74f1a48c&w=1480",
-    },
-    {
-      title: "Covid Guide",
-      img: "https://img.freepik.com/free-photo/asia-female-receptionist-conducting-wear-protective-face-mask-use-infrared-thermometer-checker-temperature-gun-customer-s-forehead-before-enter-office-lifestyle-new-normal-after-corona-virus_7861-2610.jpg?t=st=1756290371~exp=1756293971~hmac=c7c19ea8ebb13b52e74835f77068156a7df1f8291898c6d73c1d31e2cd06844d&w=1480",
-    },
-    {
-      title: "Press Releases",
-      img: "https://img.freepik.com/free-photo/person-conducting-interview_23-2149037944.jpg?ga=GA1.1.1568188790.1748154404&semt=ais_hybrid&w=740&q=80",
-    },
-  ];
-
-  const articles = [
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1761.jpg",
-      title: "किसानों की आमदनी बढ़ाने का जरिया है पीएम कुसुम योजना",
-      desc: "योजना की खास बातें हैं कि किसान अपनी बंजर या खेतों के लायक नहीं रही जमीन पर 500 किलो वाट से 2 मेगावाट क्षमता के सौर ऊर्जा संयंत्र लगा सकते हैं...",
-      lang: "hi",
-    },
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1676.jpg",
-      title: "Why India should have a ‘sin tax’ on ultra-processed foods",
-      desc: "Ultra-processed foods, apart from aggravating lifestyle diseases like obesity, diabetes, endocrine disruptions, cardiac issues, and high blood pressure...",
-      lang: "en",
-    },
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1655.jpg",
-      title: "National Turmeric Board in Nizamabad becomes a reality",
-      desc: "The long-cherished dream of Telangana turmeric farmers is set to become a reality with the formal inauguration of the National Turmeric Board...",
-      lang: "en",
-    },
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1537.jpg",
-      title: "कृषि चक्र: उत्पादन, शोध, निवेश और तकनीक",
-      desc: "समय की आवश्यकता है कि किसानों के हित में आवश्यक वस्तु अधिनियम को सरकार को उपयुक्तता ताप के लिए आवश्यक वस्तुओं की कमी को नियंत्रित करने में सक्षम बनाया जाए...",
-      lang: "hi",
-    },
-  ];
-  const gmDebate = [
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1131.jpg",
-      title: "डॉक्टरों ने जीएम सरसों को बताया पर्यावरण प्रतिरोधी",
-      desc: "देशभर के 100 से अधिक डॉक्टरों ने जीएम सरसों को लेकर प्रधानमंत्री मोदी को पत्र लिखा है। डॉक्टरों ने पीएम मोदी से आग्रह किया है कि आनुवंशिक रूप से संशोधित सरसों...",
-      lang: "hi",
-    },
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1124.jpg",
-      title: "GM fundamentalists can’t even give one valid argument: Dr. Mahajan",
-      desc: "‘We don’t need GM mustard to improve yields, we just have to rely on varieties that are already growing in India,’ says Mahajan. — Indra Shekhar...",
-      lang: "en",
-    },
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1118.jpg",
-      title: "Why govt’s policy shift on GM crops may run into rough weather",
-      desc: "The Union government’s green signal for genetically modified (GM) herbicide tolerant (HT) mustard, Dhara Mustard Hybrid-11 (DMH-11), buttressed by...",
-      lang: "en",
-    },
-    {
-      img: "https://www.swadeshionline.in/assets/uploads/news-1103.jpg",
-      title: "जीएम सरसों के पौधों को उखाड़े जाने की उच्चतम न्यायालय से मांग",
-      desc: "आनुवांशिक रूप से संवर्धित (जीएम) फसलों के खिलाफ अभियान चलाने वाले संगठनों की तरफ से बुधवार को उच्चतम न्यायालय में कहा गया कि पर्यावरणीय परीक्षण मंजूरी मिलने के...",
-      lang: "hi",
-    },
-  ];
-  const slides = [
-    {
-      image:
-        "https://img.freepik.com/premium-photo/view-ganga-river-embankment-lakshman-jhula-bridge-tera-manzil-temple-rishikesh-india_617018-17.jpg?w=1480",
-      title: "PORMARTH",
-      subtitle: "to the sacred ghats of Rishikesh",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1566552881560-0be862a7c445?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-      title: "SPIRITUAL RETREAT",
-      subtitle: "find your inner peace",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1532664189809-02133fee698d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-      title: "CULTURAL HERITAGE",
-      subtitle: "discover ancient traditions",
-    },
-  ];
-  const destinations = [
-    {
-      name: "भारत बना दुनिया का चौथा सबसे अधिक समानता वाला देश",
-      image:
-        "https://www.swadeshionline.in/assets/uploads/news-1778.jpg",
-      description: "The historic capital with a blend of ancient and modern",
-    },
-    {
-      name: "स्वदेशी सैन्य तकनीकी और नवाचार",
-      image:
-        "https://www.swadeshionline.in/assets/uploads/news-1777.jpg",
-      description: "Yoga capital of the world on the banks of Ganges",
-    },
-    {
-      name: "भारत पर बढ़ता दुनिया का भरोसाः भारत और ब्रिटेन ने किये मुक्त व्यापार समझौते पर हस्ताक्षर",
-      image:
-      "https://www.swadeshionline.in/assets/uploads/news-1776.jpg",
-      description: "One of the world's oldest living cities",
-    },
-    // {
-    //   name: "Jaipur",
-    //   image:
-    //     "https://images.unsplash.com/photo-1477581265664-b1e27c6731a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-    //   description: "The Pink City with magnificent palaces and forts",
-    // },
-    // {
-    //   name: "Goa",
-    //   image:
-    //     "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-    //   description: "Sun, sand and Portuguese heritage",
-    // },
-  ];
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying);
+    setShowPlayButton(false);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -297,111 +142,32 @@ const Pormarth = () => {
         </div>
       </section>
       {/* Destinations Section */}
-      <section className="relative py-16 px-4 md:px-8 bg-gray-50">
-        {/* <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">DESTINATIONS</h2>
-          <p className="text-gray-600">for every bucket list</p>
-        </div> */}
-
+      <section className="relative py-16 px-4 md:px-8 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto">
-          {/* Main destination display */}
-          {/* <div className="h-full md:h-[500px] rounded-lg overflow-hidden shadow-xl mb-8 relative">
-            <img
-              src={destinations[currentDestination].image}
-              alt={destinations[currentDestination].name}
-              className="w-full h-full object-cover transition-opacity duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-3xl md:text-4xl font-bold mb-2">
-                {destinations[currentDestination].name}
-              </h3>
-              <p className="text-lg md:text-xl">
-                {destinations[currentDestination].description}
-              </p>
-            </div>
-
-            Navigation arrows
-            <button
-              onClick={goToPrev}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-300"
-              aria-label="Previous destination"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-
-            <button
-              onClick={goToNext}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-300"
-              aria-label="Next destination"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-
-            Indicator dots
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-              {destinations.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full ${
-                    currentDestination === index ? "bg-amber-500" : "bg-white"
-                  }`}
-                  onClick={() => goToDestination(index)}
-                  aria-label={`Go to ${destinations[index].name}`}
-                />
-              ))}
-            </div>
-          </div> */}
-
           {/* Thumbnail navigation */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {destinations.map((destination, index) => (
               <div
                 key={index}
-                className={`relative h-24 md:h-60 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${currentDestination === index
-                  ? " ring-amber-500"
-                  : "opacity-80 hover:opacity-100"
+                className={`relative h-24 md:h-60 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 transform ${currentDestination === index
+                    ? " scale-105 shadow-xl"
+                    : "opacity-90 hover:opacity-100 hover:scale-102 hover:shadow-lg"
                   }`}
                 onClick={() => goToDestination(index)}
               >
                 <img
                   src={destination.image}
                   alt={destination.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                 />
-                {/* <div className="absolute inset-0 bg-black opacity-40"></div> */}
-                <div className="absolute inset-0  flex items-end">
-                  <span className="text-white bg-gray-600 font-semi w-full text-sm md:text-base px-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-3">
+                  <span className="text-white font-semibold text-sm md:text-base px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full">
                     {destination.name}
                   </span>
                 </div>
+                {/* {currentDestination === index && (
+            <div className="absolute top-3 right-3 w-3 h-3  rounded-full animate-pulse"></div>
+          )} */}
               </div>
             ))}
           </div>
@@ -409,77 +175,94 @@ const Pormarth = () => {
       </section>
 
       {/* Top Picks Section */}
-      <section className="flex flex-col md:flex-row gap-6 p-6">
+      <section className="flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="flex flex-col w-full md:w-7/12">
-          <h2 className="text-2xl font-bold border-b pb-2 mb-4">TOP PICKS</h2>
-          <div className="h-80 w-full overflow-hidden rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold pb-2 mb-2 relative inline-block">
+            TOP PICKS
+            <div className="absolute bottom-0 left-0 w-20 h-1 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full transform translate-y-1"></div>
+          </h2>
+          <div className="h-90 w-full overflow-hidden rounded-xl shadow-lg transition-all duration-500 hover:shadow-xl">
             <img
               src="https://www.swadeshionline.in/assets/uploads/photo-370.jpg"
               alt="Top Picks"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
+          <p className="mt-4 text-gray-600 text-sm">
+            Discover our carefully selected favorites just for you
+          </p>
         </div>
 
-        <div className="flex flex-col mt-3 w-full md:w-5/12">
-          <h3 className="text-lg font-semibold mb-4">स्वदेशी-विदेशी प्रोडक्ट्स लिस्ट</h3>
-          <Link to="https://www.swadeshionline.in/assets/pdf/swadeshi-videshi_products.pdf" className=" cursore-pointer ">
-            <div className="h-80 w-full overflow-hidden rounded-md">
+        <div className="flex flex-col mt-5 w-full md:w-5/12">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">स्वदेशी-विदेशी प्रोडक्ट्स लिस्ट</h3>
+          <Link
+            to="https://www.swadeshionline.in/assets/pdf/swadeshi-videshi_products.pdf"
+            className="cursor-pointer group relative block"
+          >
+            <div className="h-80 w-full overflow-hidden rounded-xl shadow-md transition-all duration-500 group-hover:shadow-lg">
               <img
                 src="https://www.swadeshionline.in/assets/images/comodity.jpg"
                 alt="Products List"
-                className="w-full h-full"
+                className="w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
+              <div className="absolute rounded-xl inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center p-4">
+                <span className="text-white font-medium text-center">View Product List</span>
+              </div>
             </div>
           </Link>
+          <p className="mt-4 text-gray-600 text-sm">
+            Explore our comprehensive list of Swadeshi and Videshi products
+          </p>
         </div>
       </section>
 
       {/* Agriculture Section */}
 
-      <section className="p-6 bg-gradient-to-br from-gray-50 to-white rounded-xl ">
+      <section className="p-8 bg-gradient-to-br from-green-50 to-white shadow-sm">
         {/* Section Title */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800">AGRICULTURE</h2>
-            <div className="h-1 w-33 bg-green-500 mt-2  mx-auto rounded-full"></div>
+        <div className="flex items-center justify-between mb-10">
+          <div className="relative">
+            <h2 className="text-4xl font-bold text-gray-800">AGRICULTURE</h2>
+            {/* <div className="h-1 w-26 bg-gradient-to-r from-green-500 to-green-600 mt-3 rounded-full"></div> */}
+            <div className="absolute -bottom-2 left-0 w-44 h-1 bg-gradient-to-r from-green-300 to-transparent rounded-full"></div>
           </div>
-          <button className="text-green-600 hover:text-green-800 font-medium flex items-center gap-1">
+          <button className="text-green-600 hover:text-green-800 font-medium flex items-center gap-2 group transition-all duration-300 px-4 py-2 rounded-lg hover:bg-green-50">
             View all
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </button>
         </div>
 
         {/* Articles List - 2-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {articles.map((item, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+          {agriculture.slice(0, 4).map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col md:flex-row items-start gap-5 p-5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col md:flex-row items-start gap-6 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1.5"
             >
               {/* Image with subtle frame */}
               <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover border-2 border-white shadow-md"
+                  className="w-24 h-24 rounded-xl object-cover border-2 border-white shadow-md group-hover:shadow-lg transition-all duration-500 group-hover:scale-105"
                 />
-                <div className="absolute -inset-1 border border-green-200 rounded-xl -z-10"></div>
+                <div className="absolute -inset-1.5 border border-green-100 rounded-xl -z-10 group-hover:border-green-200 transition-colors duration-500"></div>
               </div>
 
               {/* Content */}
               <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-2 text-gray-800 group-hover:text-green-700 transition-colors">
+                <h3 className="font-semibold text-lg mb-3 text-gray-800 group-hover:text-green-700 transition-colors duration-300">
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
                   {item.desc}
                 </p>
-                <button className="bg-gradient-to-r from-green-500 to-green-600 text-white text-sm px-4 py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow-md flex items-center gap-1">
+                <button className="bg-gradient-to-r from-green-500 to-green-600 text-white text-sm px-5 py-2.5 rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow-md flex items-center gap-2 group/btn">
                   Read more
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -491,49 +274,51 @@ const Pormarth = () => {
 
       {/* GM Debate Section */}
 
-      <section className="p-6 bg-gradient-to-br from-gray-50 to-white rounded-xl ">
+      <section className="p-8 bg-gradient-to-br from-amber-50/40 to-white shadow-inner">
         {/* Section Title */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800">GM DEBATE</h2>
-            <div className="w-28 h-1 bg-gradient-to-r from-amber-200 to-amber-900 mx-auto mt-2"></div>
+        <div className="flex items-center justify-between mb-10">
+          <div className="relative">
+            <h2 className="text-4xl font-bold text-gray-800 tracking-tight">GM DEBATE</h2>
+            {/* <div className="w-32 h-1.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-500 to-amber-700 mx-auto mt-3"></div> */}
+            <div className="absolute -bottom-2 left-0 w-40 h-1 bg-gradient-to-r from-amber-200 to-transparent rounded-full"></div>
           </div>
-          <button className="text-green-600 hover:text-green-800 font-medium flex items-center gap-1">
+          <button className="text-amber-700 hover:text-amber-900 font-medium flex items-center gap-2 group transition-all duration-300 px-4 py-2.5 rounded-xl hover:bg-amber-100/50">
             View all
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </button>
         </div>
 
         {/* Articles List - 2-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {gmDebate.map((item, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+          {gmDebate.slice(0,4).map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col md:flex-row items-start gap-5 p-5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col md:flex-row items-start gap-6 p-6 rounded-2xl bg-white border border-amber-100/60 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1.5"
             >
               {/* Image with subtle frame */}
               <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover border-2 border-white shadow-md"
+                  className="w-24 h-24 rounded-xl object-cover border-2 border-white shadow-md group-hover:shadow-lg transition-all duration-500 group-hover:scale-105"
                 />
-                <div className="absolute -inset-1 border border-green-200 rounded-xl -z-10"></div>
+                <div className="absolute -inset-1.5 border border-amber-100 rounded-xl -z-10 group-hover:border-amber-200 transition-colors duration-500"></div>
               </div>
 
               {/* Content */}
               <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-2 text-gray-800 group-hover:text-green-700 transition-colors">
+                <h3 className="font-semibold text-lg mb-3 text-gray-800 group-hover:text-amber-700 transition-colors duration-300">
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
                   {item.desc}
                 </p>
-                <button className="bg-gradient-to-r from-green-500 to-green-600 text-white text-sm px-4 py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow-md flex items-center gap-1">
+                <button className="bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm px-5 py-2.5 rounded-xl hover:from-amber-600 hover:to-amber-700 transition-all shadow-sm hover:shadow-md flex items-center gap-2 group/btn">
                   Read more
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -590,9 +375,10 @@ const Pormarth = () => {
     </button>
   </div> */}
       </section>
+
       {/* Recent News section */}
 
-      <section className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+      <section className="bg-white shadow-lg p-6 md:p-8">
         {/* Header with icon and action button */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -656,7 +442,7 @@ const Pormarth = () => {
       </section>
 
       {/* Popular News Section */}
-      <section className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+      <section className="bg-white shadow-lg p-6 md:p-8">
         {/* Header with icon and action button */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -746,9 +532,108 @@ const Pormarth = () => {
           ))}
         </div>
       </section>
+      {/* latest print and on media section */}
+      <section className="py-12 px-4 md:px-8 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-800 mb-3">
+              Featured Content
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Explore our latest magazine edition and featured video content
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-2xl bg-white h-auto md:h-[500px] transform transition-all duration-300 hover:shadow-xl">
+
+            {/* Left Magazine Side */}
+            <div className="md:w-1/2 w-full h-64 md:h-full p-4 md:p-6 relative group">
+              <a
+                href="https://www.swadeshionline.in/assets/uploads/magazine-22-07-2025-465.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block cursor-pointer h-full rounded-xl overflow-hidden shadow-md transition-all duration-500 transform group-hover:shadow-xl"
+              >
+                <div className="relative h-full">
+                  <img
+                    src="https://www.swadeshionline.in/assets/uploads/thumb-22-07-2025-465.jpg"
+                    alt="swadeshi print"
+                    className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                    <div className="p-5 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-xl font-bold mb-2">Latest Edition</h3>
+                      <p className="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        Click to view the full magazine
+                      </p>
+                      <div className="flex items-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+                        <span className="text-sm mr-2">View now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                New Issue
+              </div>
+            </div>
+
+            {/* Right Video Side */}
+            <div className="md:w-1/2 w-full h-64 md:h-full p-4 md:p-6 relative group">
+              <div className="relative w-full h-full rounded-xl overflow-hidden shadow-md transition-all duration-500 transform group-hover:shadow-xl">
+                <video
+                  controls
+                  className="w-full h-full object-cover"
+                  poster="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                >
+                  <source src="your-video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                {showPlayButton && (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer"
+                    onClick={handlePlayPause}
+                  >
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 animate-pulse">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-white" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
+
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <h3 className="text-xl font-bold mb-1">Featured Video</h3>
+                  <p className="text-sm">Discover the latest trends in fashion and design</p>
+                </div>
+              </div>
+
+              <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                Trending
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center mt-8 space-x-4">
+            <div className="flex items-center text-sm text-gray-600">
+              <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
+              Magazine
+            </div>
+            <div className="flex items-center text-sm text-gray-600">
+              <div className="w-3 h-3 bg-blue-600 rounded-full mr-2"></div>
+              Video
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <Footer />
     </div>
   );
 };
-export default Pormarth;
+export default HomePage;

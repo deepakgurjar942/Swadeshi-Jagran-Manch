@@ -54,7 +54,7 @@ const MovementPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto mt-28 px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div className="container mx-auto mt-28 px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
@@ -67,32 +67,43 @@ const MovementPage = () => {
         </div>
 
         {/* Timeline Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">Historical Timeline</h2>
+        <div className="mb-16 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center">Historical Timeline</h2>
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-amber-400 to-amber-600"></div>
-            
-            <div className="space-y-12">
+            {/* Timeline line - responsive positioning */}
+            <div
+              className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1 bg-gradient-to-b from-amber-400 to-amber-600 z-0"
+              style={{
+                height: `calc(100% - ${timelineEvents.length > 0 ? '220px' : '0px'})`,
+                top: '48px'
+              }}
+            ></div>
+
+            <div className="space-y-8 sm:space-y-12">
               {timelineEvents.map((period, index) => (
-                <div key={index} className="relative flex flex-col md:flex-row items-start">
-                  {/* Year marker */}
-                  <div className="flex items-center justify-center w-24 h-24 rounded-full bg-amber-500 text-white font-bold text-lg z-10 absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2">
+                <div key={index} className="relative flex flex-col items-center sm:flex-row sm:items-center">
+                  {/* Year marker - responsive positioning */}
+                  <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-23 md:h-23 rounded-full bg-amber-500 text-white font-bold text-base sm:text-lg z-10 absolute left-0 sm:left-1/2 sm:transform sm:-translate-x-1/2 mb-4 sm:mb-0">
                     {period.year}
                   </div>
-                  
-                  {/* Content */}
-                  <div className={`ml-24 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8'} mt-2`}>
-                    <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-                      <ul className="space-y-2">
+
+                  {/* Content container - responsive layout */}
+                  <div className={`w-full sm:w-1/2 mt-0 sm:mt-2 pl-12 sm:pl-0 ${index % 2 === 0 ? 'sm:pr-9 sm:order-first' : 'sm:pl-9 sm:order-last'}`}>
+                    <div className={`bg-white p-4 sm:p-6 rounded-lg shadow-md border-r-4 border-l-4 border-amber-500 ${index % 2 === 0 ? 'sm:border-l- sm:border-r-4' : 'sm:border-r-4'}`}>
+                      <h3 className="font-semibold text-amber-700 mb-2 sm:mb-3 text-sm sm:text-base md:text-lg">Key Events</h3>
+                      <ul className="space-y-1 sm:space-y-2">
                         {period.events.map((event, eventIndex) => (
-                          <li key={eventIndex} className="text-gray-700">
-                            • {event}
+                          <li key={eventIndex} className="text-gray-700 text-xs sm:text-sm">
+                            <span className="text-amber-500 mr-1 sm:mr-2 text-sm sm:text-lg">•</span>
+                            <span>{event}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
+
+                  {/* Empty space for desktop layout */}
+                  <div className={`hidden sm:block sm:w-1/2 ${index % 2 === 0 ? 'sm:order-last' : 'sm:order-first'}`}></div>
                 </div>
               ))}
             </div>
@@ -102,7 +113,7 @@ const MovementPage = () => {
         {/* Detailed Content Section */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">The Movement in Detail</h2>
-          
+
           <div className="space-y-6 text-gray-700 leading-relaxed">
             <p>
               SJM came into existence on <strong className="text-amber-600">22 November 1991 at Nagpur</strong> and within a
@@ -195,7 +206,7 @@ const MovementPage = () => {
           </blockquote>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
