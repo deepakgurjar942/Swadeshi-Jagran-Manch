@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://scontent.fidr4-2.fna.fbcdn.net/v/t39.30808-6/299473914_8127811423928006_6376507444206134865_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=r2c644e_rgcQ7kNvwHACFUl&_nc_oc=AdlEXGGXzQTHpTAvBNkmdirHOl8LhB6TqKma4vWzRvVhEWT3w9IWZAZvJb5IquYD4afvW-P6MQ6Yr2ydxyVlZIEV&_nc_zt=23&_nc_ht=scontent.fidr4-2.fna&_nc_gid=C1TYOLDS7lDfnlFE1zW7vQ&oh=00_AfU53x6_pG1eNlNIR8MnZSw6QCSs4PxG81BY47XU2aG3Rw&oe=68B339CB" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml"
+    href="https://scontent.fidr4-2.fna.fbcdn.net/v/t39.30808-6/299473914_8127811423928006_6376507444206134865_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=r2c644e_rgcQ7kNvwHACFUl&_nc_oc=AdlEXGGXzQTHpTAvBNkmdirHOl8LhB6TqKma4vWzRvVhEWT3w9IWZAZvJb5IquYD4afvW-P6MQ6Yr2ydxyVlZIEV&_nc_zt=23&_nc_ht=scontent.fidr4-2.fna&_nc_gid=C1TYOLDS7lDfnlFE1zW7vQ&oh=00_AfU53x6_pG1eNlNIR8MnZSw6QCSs4PxG81BY47XU2aG3Rw&oe=68B339CB" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + React</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+  <script type="module" src="/src/main.jsx">
+
+  </script>
+  <script>
+       // Initialize Lenis
+    const lenis = new Lenis({
+      autoRaf: true,
+    });
+
+    // Listen for the scroll event and log the event data
+    // lenis.on('scroll', (e) => {
+    //   console.log(e);
+    // });
+  </script>
+</body>
+
 </html>

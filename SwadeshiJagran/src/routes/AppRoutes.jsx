@@ -19,12 +19,13 @@ import ResolutionPage from "../pages/ResolutionPage";
 import PressReleasesPage from "../pages/PressReleasesPage";
 import NewsPage from "../pages/NewsWirePage";
 import AllPostPage from "../pages/AllPostPage";
+import EditorialPage from "../pages/EditorialPage";
 
 const AppRoutes = () => {
   return (
     <div>
       <BrowserRouter>
-        {/* <Navbar /> */}
+        <Navbar />
         <Routes>
           {/* Redirect from root "/" to "/Home" */}
           <Route path="/" element={<Navigate to="/home" replace />} />
@@ -48,6 +49,7 @@ const AppRoutes = () => {
           <Route path="/category/press-releases" element={<PressReleasesPage/>}/>
           <Route path="/category/news-wire" element={<NewsPage/>}/>
           <Route path="/allpost" element={<AllPostPage/>}/>
+          <Route path="/category/editorial" element = {<EditorialPage/>}/>
 
         </Routes>
       </BrowserRouter>

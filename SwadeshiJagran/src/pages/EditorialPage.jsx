@@ -1,77 +1,16 @@
 import React, { useState } from 'react';
-import { envArticles } from '../services/envArticles';
 import Footer from '../layouts/Footer';
 import { Link } from 'react-router-dom';
 import { categories } from '../services/categories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
+import { editorials } from '../services/editorial';
 
 
-const EnvironmentPage = () => {
-       const [isPlaying, setIsPlaying] = useState(false);
-       const [showPlayButton, setShowPlayButton] = useState(true);
-       const [currentPage, setCurrentPage] = useState(1);
-       const articlesPerPage = 6; // Number of articles to show per page
-   
-       // Calculate total pages
-       const totalPages = Math.ceil(envArticles.length / articlesPerPage);
-   
-       // Get current articles
-       const indexOfLastArticle = currentPage * articlesPerPage;
-       const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-       const currentEnvArticles = envArticles.slice(indexOfFirstArticle, indexOfLastArticle);
-   
-       // Change page
-       const paginate = (pageNumber) => setCurrentPage(pageNumber);
-   
-       // Generate page numbers to show
-       const getPageNumbers = () => {
-           const pageNumbers = [];
-           const maxVisiblePages = 5; // Maximum number of page buttons to show
-   
-           if (totalPages <= maxVisiblePages) {
-               // If total pages is less than max visible pages, show all
-               for (let i = 1; i <= totalPages; i++) {
-                   pageNumbers.push(i);
-               }
-           } else {
-               // Always show first page
-               pageNumbers.push(1);
-   
-               let startPage = Math.max(2, currentPage - 1);
-               let endPage = Math.min(totalPages - 1, currentPage + 1);
-   
-               // Adjust if we're at the beginning
-               if (currentPage <= 2) {
-                   endPage = 3;
-               }
-   
-               // Adjust if we're at the end
-               if (currentPage >= totalPages - 1) {
-                   startPage = totalPages - 2;
-               }
-   
-               // Add ellipsis after first page if needed
-               if (startPage > 2) {
-                   pageNumbers.push('...');
-               }
-   
-               // Add middle pages
-               for (let i = startPage; i <= endPage; i++) {
-                   pageNumbers.push(i);
-               }
-   
-               // Add ellipsis before last page if needed
-               if (endPage < totalPages - 1) {
-                   pageNumbers.push('...');
-               }
-   
-               // Always show last page
-               pageNumbers.push(totalPages);
-           }
-   
-           return pageNumbers;
-       };
+const EditorialPage = () => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [showPlayButton, setShowPlayButton] = useState(true);
+
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
         setShowPlayButton(false);
@@ -83,27 +22,27 @@ const EnvironmentPage = () => {
             <section className="max-w-7xl mx-auto px-4 py-12 -mt-10">
                 {/* Section Header */}
                 <div className="bg-white rounded-xl shadow-lg p-6 mb-10">
-                    <h2 className="text-3xl font-bold text-gray-800 border-l-6 border-green-400 pl-3 mb-2">
-                        Environment
+                    <h2 className="text-3xl font-bold text-gray-800 border-l-6 border-red-600 pl-3 mb-2">
+                        Editorial Articles
                     </h2>
                     <p className="text-gray-600">
-                        Explore our collection of environment-related articles and resources
+                        Insightful editorials and opinions on various topics
                     </p>
                 </div>
 
                 {/* Articles Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {currentEnvArticles.map(article => (
+                    {editorials.map(article => (
                         <div key={article.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-gray-100">
                             <div className="relative overflow-hidden">
                                 <img
                                     src={article.image}
                                     alt={article.title}
-                                    className="w-full h-50 object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                                    className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5">
                                     <span className="text-white text-sm font-medium bg-red-600 px-3 py-1 rounded-full">
-                                        Environment
+                                        Editorial
                                     </span>
                                 </div>
                             </div>
@@ -112,7 +51,7 @@ const EnvironmentPage = () => {
                                     {article.title}
                                 </h3>
                                 <p className="text-gray-600 text-sm mb-2 line-clamp-2 leading-relaxed h-12 overflow-hidden">
-                                    {article.description}
+                                    {article.desc}
                                 </p>
                                 <div className="flex items-center justify-between border-t border-gray-100 pt-4">
                                     <span className="text-xs text-gray-500 flex items-center">
@@ -133,54 +72,15 @@ const EnvironmentPage = () => {
                     ))}
                 </div>
 
-                   {/* Pagination */}
-                {totalPages > 1 && (
-                    <div className="flex justify-center mt-12">
-                        <nav className="flex items-center space-x-2">
-                            {/* Previous Button */}
-                            <button
-                                onClick={() => paginate(currentPage - 1)}
-                                disabled={currentPage === 1}
-                                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                            </button>
-
-                            {/* Page Numbers */}
-                            {getPageNumbers().map((number, index) => (
-                                number === '...' ? (
-                                    <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
-                                        ...
-                                    </span>
-                                ) : (
-                                    <button
-                                        key={number}
-                                        onClick={() => paginate(number)}
-                                        className={`px-4 py-2 rounded-lg border transition-colors ${currentPage === number
-                                                ? 'bg-red-600 border-red-600 text-white'
-                                                : 'border-gray-300 text-gray-600 hover:bg-gray-50'
-                                            }`}
-                                    >
-                                        {number}
-                                    </button>
-                                )
-                            ))}
-
-                            {/* Next Button */}
-                            <button
-                                onClick={() => paginate(currentPage + 1)}
-                                disabled={currentPage === totalPages}
-                                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                </svg>
-                            </button>
-                        </nav>
-                    </div>
-                )}
+                {/* Load More Button */}
+                <div className="flex justify-center mt-16">
+                    <button className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center group">
+                        Load More Articles
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform group-hover:translate-y-0.5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
             </section>
             {/* Top Picks Section */}
             <section className="flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -207,7 +107,7 @@ const EnvironmentPage = () => {
                         to="https://www.swadeshionline.in/assets/pdf/swadeshi-videshi_products.pdf"
                         className="cursor-pointer group relative block"
                     >
-                        <div className="h-80 w-full overflow-hidden rounded-xl shadow-md transition-all duration-500 group-hover:shadow-lg ">
+                        <div className="h-80 w-full overflow-hidden rounded-xl shadow-md transition-all duration-500 group-hover:shadow-lg">
                             <img
                                 src="https://www.swadeshionline.in/assets/images/comodity.jpg"
                                 alt="Products List"
@@ -530,4 +430,4 @@ const EnvironmentPage = () => {
     );
 };
 
-export default EnvironmentPage;
+export default EditorialPage;
