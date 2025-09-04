@@ -1,9 +1,12 @@
+import { LenisProvider } from "./context/LenisContext";
 import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
   return (
     <div>
-      <AppRoutes/>
+    <LenisProvider>
+      <AppRoutes />
+    </LenisProvider>
     </div>
   );
 };

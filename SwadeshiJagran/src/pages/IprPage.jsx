@@ -5,11 +5,19 @@ import { Link } from 'react-router-dom';
 import { categories } from '../services/categories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
+import { usePagination } from '../hooks/usePagination';
 
 
 const IprPage = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [showPlayButton, setShowPlayButton] = useState(true);
+        const {
+        currentPage,
+        totalPages,
+        currentItems,
+        paginate,
+        getPageNumbers,
+    } = usePagination({ items: ipr, itemsPerPage: 6 });
 
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -32,7 +40,7 @@ const IprPage = () => {
 
                 {/* Articles Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {ipr.map(article => (
+                    {currentItems.map(article => (
                         <div key={article.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-gray-100">
                             <div className="relative overflow-hidden">
                                 <img
@@ -72,15 +80,54 @@ const IprPage = () => {
                     ))}
                 </div>
 
-                {/* Load More Button */}
-                <div className="flex justify-center mt-16">
-                    <button className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center group">
-                        Load More Articles
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform group-hover:translate-y-0.5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
+                 {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center mt-12">
+                        <nav className="flex items-center space-x-2">
+                            {/* Previous Button */}
+                            <button
+                                onClick={() => paginate(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+
+                            {/* Page Numbers */}
+                            {getPageNumbers().map((number, index) => (
+                                number === '...' ? (
+                                    <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
+                                        ...
+                                    </span>
+                                ) : (
+                                    <button
+                                        key={number}
+                                        onClick={() => paginate(number)}
+                                        className={`px-4 py-2 rounded-lg border transition-colors ${currentPage === number
+                                                ? 'bg-red-600 border-red-600 text-white'
+                                                : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                                            }`}
+                                    >
+                                        {number}
+                                    </button>
+                                )
+                            ))}
+
+                            {/* Next Button */}
+                            <button
+                                onClick={() => paginate(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </nav>
+                    </div>
+                )}
             </section>
             {/* Top Picks Section */}
             <section className="flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-gray-50 to-gray-100">

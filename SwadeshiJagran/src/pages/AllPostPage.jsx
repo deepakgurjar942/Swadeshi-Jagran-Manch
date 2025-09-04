@@ -6,28 +6,44 @@ import { Link } from 'react-router-dom';
 import { categories } from '../services/categories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
+import { usePagination } from "../hooks/usePagination";
+import { useSmoothScroll } from "../hooks/useSmoothScroll";
 
 const AllPostPage = () => {
   const [selectedAuthor, setSelectedAuthor] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState(posts);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   // For author section
   const [authorSearch, setAuthorSearch] = useState("");
   const [filteredAuthors, setFilteredAuthors] = useState(authors);
   const scrollRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
-
+  
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+  
+  // Use filteredPosts instead of posts for pagination
+  const {
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    currentItems,
+    paginate,
+    getPageNumbers,
+  } = usePagination({ items: filteredPosts, itemsPerPage: 6 });
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
     setShowPlayButton(false);
   };
+const { scrollTo } = useSmoothScroll();
 
+  // useEffect(() => {
+  //   scrollTo(0, { duration: 1 });
+  // }, [scrollTo]);
   // Simulate loading
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,8 +60,21 @@ const AllPostPage = () => {
       const authorName = authors.find(a => a.id === selectedAuthor)?.name;
       result = result.filter(post => post.author === authorName);
     }
+    
+    // Filter by search query if implemented
+    if (searchQuery) {
+      result = result.filter(post => 
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
     setFilteredPosts(result);
-  }, [selectedAuthor, searchQuery]);
+    // Check if setCurrentPage is a function before calling it
+    if (typeof setCurrentPage === 'function') {
+      setCurrentPage(1); // Reset to first page when filters change
+    }
+  }, [selectedAuthor, searchQuery, setCurrentPage]);
 
   // Filter authors based on search
   useEffect(() => {
@@ -206,20 +235,8 @@ const AllPostPage = () => {
                             <h3 className="font-medium text-justify text-gray-900 truncate group-hover:text-blue-600 transition-colors">
                               {author.name}
                             </h3>
-                            {/* <p className="text-sm text-gray-500 truncate mt-1">{author.role}</p> */}
                           </div>
                         </div>
-                        {/* <div className="mt-4 pt-4 border-t border-gray-100">
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span>{author.postCount || author.posts || 0} articles</span>
-                            <span className="text-blue-600 font-medium flex items-center">
-                              View profile
-                              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                              </svg>
-                            </span>
-                          </div>
-                        </div> */}
                       </div>
                     </button>
                   ))
@@ -259,19 +276,8 @@ const AllPostPage = () => {
           </h2>
           <div className="flex items-center gap-4">
             <p className="text-sm text-gray-500">
-              Showing <span className="font-medium">{filteredPosts.length}</span> results
+              Showing <span className="font-medium">{(currentPage - 1) * 6 + 1}-{Math.min(currentPage * 6, filteredPosts.length)}</span> of <span className="font-medium">{filteredPosts.length}</span> results
             </p>
-            {/* {searchQuery && (
-              <button
-                onClick={clearSearch}
-                className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center transition-colors"
-              >
-                Clear search
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            )} */}
           </div>
         </div>
 
@@ -294,18 +300,19 @@ const AllPostPage = () => {
             ))}
           </div>
         ) : filteredPosts.length > 0 ? (
+          <>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-            {filteredPosts.map((post) => (
+            {currentItems.map((post) => (
               <div
-                key={post.id}
-                className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group"
+              key={post.id}
+              className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group"
               >
                 <div className="h-48 overflow-hidden relative">
                   <img
                     src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                    />
                   <div className="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xs font-medium px-3 py-1.5 rounded-full shadow-md">
                     {post.category}
                   </div>
@@ -333,6 +340,56 @@ const AllPostPage = () => {
               </div>
             ))}
           </div>
+               {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center mt-12">
+                        <nav className="flex items-center space-x-2">
+                            {/* Previous Button */}
+                            <button
+                                onClick={() => paginate(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+
+                            {/* Page Numbers */}
+                            {getPageNumbers().map((number, index) => (
+                                number === '...' ? (
+                                    <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
+                                        ...
+                                    </span>
+                                ) : (
+                                    <button
+                                        key={number}
+                                        onClick={() => paginate(number)}
+                                        className={`px-4 py-2 rounded-lg border transition-colors ${currentPage === number
+                                                ? 'bg-red-600 border-red-600 text-white'
+                                                : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                                            }`}
+                                    >
+                                        {number}
+                                    </button>
+                                )
+                            ))}
+
+                            {/* Next Button */}
+                            <button
+                                onClick={() => paginate(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </nav>
+                    </div>
+                )}
+            </>
+          
         ) : (
           <div className="text-center py-16 bg-white/80 backdrop-blur-sm rounded-2xl shadow-md border border-gray-100">
             <div className="text-6xl mb-4">🔍</div>
@@ -350,17 +407,6 @@ const AllPostPage = () => {
           </div>
         )}
       </section>
-
-      {/* Hidden scrollbar styles */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none; /* Chrome, Safari and Opera */
-        }
-      `}</style>
 
       {/* Top Picks Section */}
       <section className="flex flex-col md:flex-row gap-6 p-6 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -426,7 +472,7 @@ const AllPostPage = () => {
                 <img
                   src={cat.img}
                   alt={cat.title}
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white relative z-10 shadow-md group-hover:scale-110 transition-transform duration-300"
+                  className="w-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white relative z-10 shadow-md group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
 
@@ -440,16 +486,6 @@ const AllPostPage = () => {
             </div>
           ))}
         </div>
-
-        {/* View All Button */}
-        {/* <div className="text-center mt-8">
-    <button className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md hover:shadow-lg">
-      View All Categories
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
-    </button>
-  </div> */}
       </section>
       {/* Recent News section */}
 
@@ -550,27 +586,6 @@ const AllPostPage = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-
-                {/* Popular badge with ranking */}
-                {/* <div className="absolute top-3 left-3 flex items-center">
-            <div className="bg-red-500 text-white text-xs px-2 py-1 rounded-full flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              <span>#{idx + 1} Popular</span>
-            </div>
-          </div> */}
-
-                {/* View count */}
-                {/* <div className="absolute top-3 right-3">
-            <span className="bg-black/70 text-white text-xs px-2 py-1 rounded-full flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-              </svg>
-              {Math.floor(Math.random() * 1000) + 500}
-            </span>
-          </div> */}
               </div>
 
               {/* Content */}
@@ -599,7 +614,7 @@ const AllPostPage = () => {
                   Read more
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
-                  </svg>
+                    </svg>
                 </button>
               </div>
             </div>
@@ -706,6 +721,19 @@ const AllPostPage = () => {
       </section>
       {/* Footer */}
       <Footer />
+      
+      {/* Hidden scrollbar styles - Fixed JSX issue */}
+      <style>
+        {`
+          .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+          }
+        `}
+      </style>
     </div>
   );
 };

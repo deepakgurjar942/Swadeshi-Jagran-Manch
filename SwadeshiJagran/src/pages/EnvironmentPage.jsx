@@ -5,73 +5,19 @@ import { Link } from 'react-router-dom';
 import { categories } from '../services/categories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
+import { usePagination } from '../hooks/usePagination';
 
 
 const EnvironmentPage = () => {
        const [isPlaying, setIsPlaying] = useState(false);
        const [showPlayButton, setShowPlayButton] = useState(true);
-       const [currentPage, setCurrentPage] = useState(1);
-       const articlesPerPage = 6; // Number of articles to show per page
-   
-       // Calculate total pages
-       const totalPages = Math.ceil(envArticles.length / articlesPerPage);
-   
-       // Get current articles
-       const indexOfLastArticle = currentPage * articlesPerPage;
-       const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-       const currentEnvArticles = envArticles.slice(indexOfFirstArticle, indexOfLastArticle);
-   
-       // Change page
-       const paginate = (pageNumber) => setCurrentPage(pageNumber);
-   
-       // Generate page numbers to show
-       const getPageNumbers = () => {
-           const pageNumbers = [];
-           const maxVisiblePages = 5; // Maximum number of page buttons to show
-   
-           if (totalPages <= maxVisiblePages) {
-               // If total pages is less than max visible pages, show all
-               for (let i = 1; i <= totalPages; i++) {
-                   pageNumbers.push(i);
-               }
-           } else {
-               // Always show first page
-               pageNumbers.push(1);
-   
-               let startPage = Math.max(2, currentPage - 1);
-               let endPage = Math.min(totalPages - 1, currentPage + 1);
-   
-               // Adjust if we're at the beginning
-               if (currentPage <= 2) {
-                   endPage = 3;
-               }
-   
-               // Adjust if we're at the end
-               if (currentPage >= totalPages - 1) {
-                   startPage = totalPages - 2;
-               }
-   
-               // Add ellipsis after first page if needed
-               if (startPage > 2) {
-                   pageNumbers.push('...');
-               }
-   
-               // Add middle pages
-               for (let i = startPage; i <= endPage; i++) {
-                   pageNumbers.push(i);
-               }
-   
-               // Add ellipsis before last page if needed
-               if (endPage < totalPages - 1) {
-                   pageNumbers.push('...');
-               }
-   
-               // Always show last page
-               pageNumbers.push(totalPages);
-           }
-   
-           return pageNumbers;
-       };
+               const {
+               currentPage,
+               totalPages,
+               currentItems,
+               paginate,
+               getPageNumbers,
+           } = usePagination({ items:envArticles, itemsPerPage: 6 });
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
         setShowPlayButton(false);
@@ -93,7 +39,7 @@ const EnvironmentPage = () => {
 
                 {/* Articles Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {currentEnvArticles.map(article => (
+                    {currentItems.map(article => (
                         <div key={article.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-gray-100">
                             <div className="relative overflow-hidden">
                                 <img

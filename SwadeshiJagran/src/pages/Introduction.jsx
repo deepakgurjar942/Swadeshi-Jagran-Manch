@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../layouts/Footer';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
 
 const Introduction = () => {
+  const { scrollTo } = useSmoothScroll();
+  
+    useEffect(() => {
+      scrollTo(0, { duration: 1 });
+    }, [scrollTo]);
   return (
     <>
       <div className="container-fluid mt-28 flex flex-col items-center px-4 sm:px-6 lg:px-12">
@@ -18,7 +24,7 @@ const Introduction = () => {
         </div>
 
         {/* Content Section */}
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-10 lg:p-12">
+        <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-10 lg:p-12">
           <div className="text-gray-800 leading-relaxed text-base md:text-lg lg:text-xl">
             <p className="mb-8 font-serif text-xl md:text-2xl text-gray-700 italic border-l-4 border-amber-500 pl-6 py-3 bg-amber-50/30 rounded-r-lg">
               "The concept of <strong className="text-amber-600">Swadeshi</strong> is more than 150 years old. It was a guiding
@@ -152,12 +158,12 @@ const Introduction = () => {
         </div>
 
         {/* Quote Section */}
-        <div className="max-w-4xl mx-auto mt-14 text-center">
+        <div className="max-w-4xl mx-auto pb-17 mt-14 text-center">
           <div className="relative">
             <svg className="w-12 h-12 text-amber-400 opacity-30 absolute -top-6 -left-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
-            <blockquote className="text-xl md:text-2xl italic text-gray-700 font-light leading-relaxed">
+            <blockquote className="text-xl pt-5 md:text-2xl italic text-gray-700 font-light leading-relaxed">
               "Swadeshi is not merely an economic strategy, but a way of life that embraces self-reliance, cultural pride, and national prosperity"
             </blockquote>
             <svg className="w-12 h-12 text-amber-400 opacity-30 absolute -bottom-6 -right-6" fill="currentColor" viewBox="0 0 24 24">

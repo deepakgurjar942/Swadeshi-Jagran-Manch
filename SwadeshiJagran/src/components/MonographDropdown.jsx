@@ -32,7 +32,7 @@ const Monograph = () => {
       >
         <div className="py-1">
           <Link
-            to="/monograph/about-monograph"
+            to="/page/about-monograph"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
@@ -46,7 +46,7 @@ const Monograph = () => {
             Editorial Board
           </Link>
           <Link
-            to="/monograph/aim-scope"
+            to="/page/aim-scope"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
