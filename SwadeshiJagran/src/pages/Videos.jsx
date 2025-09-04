@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const GovernmentEvents = () => {
+const Videos = () => {
   const [selectedEvent, setSelectedEvent] = useState(0);
   const [activeCategory, setActiveCategory] = useState('All');
   
@@ -319,4 +319,4 @@ const GovernmentEvents = () => {
   );
 };
 
-export default GovernmentEvents;
+export default Videos;

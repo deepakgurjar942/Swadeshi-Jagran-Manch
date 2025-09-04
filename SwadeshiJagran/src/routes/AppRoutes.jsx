@@ -20,6 +20,9 @@ import PressReleasesPage from "../pages/PressReleasesPage";
 import NewsPage from "../pages/NewsWirePage";
 import AllPostPage from "../pages/AllPostPage";
 import EditorialPage from "../pages/EditorialPage";
+import Photos from "../pages/Photos";
+import Books from "../pages/Books";
+import Videos from "../pages/Videos";
 
 const AppRoutes = () => {
   return (
@@ -50,6 +53,9 @@ const AppRoutes = () => {
           <Route path="/category/news-wire" element={<NewsPage/>}/>
           <Route path="/allpost" element={<AllPostPage/>}/>
           <Route path="/category/editorial" element = {<EditorialPage/>}/>
+          <Route path="gallery/photo-gallery" element={<Photos/>}/>
+          <Route path="gallery/video-gallery" element={<Videos/>}/>
+          <Route path="/publication/books" element={<Books/>}/>
 
         </Routes>
       </BrowserRouter>
