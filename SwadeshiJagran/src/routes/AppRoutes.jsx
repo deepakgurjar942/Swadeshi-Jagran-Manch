@@ -20,7 +20,6 @@ import PressReleasesPage from "../pages/PressReleasesPage";
 import NewsPage from "../pages/NewsWirePage";
 import AllPostPage from "../pages/AllPostPage";
 import EditorialPage from "../pages/EditorialPage";
-import Monograph from "../pages/Monograph";
 
 const AppRoutes = () => {
   return (
@@ -51,8 +50,6 @@ const AppRoutes = () => {
           <Route path="/category/news-wire" element={<NewsPage/>}/>
           <Route path="/allpost" element={<AllPostPage/>}/>
           <Route path="/category/editorial" element = {<EditorialPage/>}/>
-          <Route path="/page/about-monograph" element = {<Monograph/>}/>
-
 
         </Routes>
       </BrowserRouter>
