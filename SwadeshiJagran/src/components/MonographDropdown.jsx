@@ -12,7 +12,6 @@ const Monograph = () => {
       onMouseLeave={() => setIsOpen(false)}
     >
       <Link
-        to="/monograph"
         className="px-4 py-2 text-gray-100 hover:text-indiaSaffron transition-colors duration-200 text-sm font-medium flex items-center space-x-1"
       >
         <span> Monograph</span>

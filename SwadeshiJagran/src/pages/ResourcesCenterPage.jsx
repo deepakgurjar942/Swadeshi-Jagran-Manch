@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { articles } from '../services/articles';
+import { resourcesCenter } from '../services/resourcesCenter';
 import Footer from '../layouts/Footer';
 import { Link } from 'react-router-dom';
 import { categories } from '../services/categories';
@@ -7,7 +7,7 @@ import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
 import { usePagination } from '../hooks/usePagination';
 
-const EducationPage = () => {
+const ResourcesCenterPage = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [showPlayButton, setShowPlayButton] = useState(true);
     const {
@@ -16,7 +16,7 @@ const EducationPage = () => {
         currentItems,
         paginate,
         getPageNumbers,
-    } = usePagination({ items: articles, itemsPerPage: 6 });
+    } = usePagination({ items: resourcesCenter, itemsPerPage: 6 });
 
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -24,59 +24,6 @@ const EducationPage = () => {
     };
 
     return (
-<<<<<<< HEAD
-        <div className="min-h-screen mt-34 bg-gradient-to-b from-gray-50 to-gray-100">
-            {/* Header Section */}
-            <section className="max-w-7xl mx-auto px-4 py-12 -mt-10">
-                {/* Section Header */}
-                <div className="bg-white rounded-xl shadow-lg p-6 mb-10">
-                    <h2 className="text-3xl font-bold text-gray-800 border-l-6 border-red-600 pl-3 mb-2">
-                        Education
-                    </h2>
-                    <p className="text-gray-600">
-                        Explore our collection of educational articles and resources
-                    </p>
-                </div>
-
-                {/* Articles Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {currentItems.map(article => (
-                        <div key={article.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-gray-100">
-                            <div className="relative overflow-hidden">
-                                <img
-                                    src={article.image}
-                                    alt={article.title}
-                                    className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5">
-                                    <span className="text-white text-sm font-medium bg-red-600 px-3 py-1 rounded-full">
-                                        Education
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-red-600 transition-colors duration-300 line-clamp-2 min-h-[3rem] leading-tight">
-                                    {article.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm mb-2 line-clamp-2 leading-relaxed h-12 overflow-hidden">
-                                    {article.description}
-                                </p>
-                                <div className="flex items-center justify-between border-t border-gray-100 pt-4">
-                                    <span className="text-xs text-gray-500 flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                                        </svg>
-                                        {article.date || 'Recent'}
-                                    </span>
-                                    <button className="text-red-600 hover:text-red-800 text-sm font-medium flex items-center group/btn transition-all">
-                                        Read more
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transition-transform group-hover/btn:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-=======
         <>
             <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
                 {/* Hero Section */}
@@ -84,14 +31,13 @@ const EducationPage = () => {
                     <div className="text-center mb-12 max-w-4xl">
                         <div className="inline-block relative">
                             <h1 className="font-bold text-gray-900 text-4xl sm:text-5xl lg:text-6xl mb-8 relative z-10">
-                                EDUCATION RESOURCES
+                                RESOURCES CENTER
                             </h1>
                             <div className="absolute left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-amber-600 mt-4 rounded-full"></div>
                             <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-3 w-48 h-1 bg-gradient-to-r from-amber-300 to-transparent rounded-full"></div>
->>>>>>> a18891c1e5bf493d2d8f8b4eead2c1f9f2955497
                         </div>
                         <p className="text-xl md:text-2xl text-gray-700 italic font-serif mt-8 leading-relaxed">
-                            Explore our collection of educational articles and resources on economic sovereignty
+                            "A Hub of Knowledge and Insights: Explore Our Comprehensive Resources"
                         </p>
                     </div>
                 </div>
@@ -110,7 +56,7 @@ const EducationPage = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v8"></path>
                                         </svg>
                                     </span>
-                                    Educational Articles
+                                    Resources Center
                                 </h2>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -123,7 +69,7 @@ const EducationPage = () => {
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
                                                 <div className="absolute top-4 right-4 bg-amber-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                                    Education
+                                                    Resources
                                                 </div>
                                             </div>
                                             <div className="p-5">
@@ -162,7 +108,7 @@ const EducationPage = () => {
                                                 className="px-3 py-2 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                             >
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+                                                    <path strokeLinecap="round" strokeLinejoin极速赛车开奖结果记录="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
                                                 </svg>
                                             </button>
 
@@ -203,9 +149,9 @@ const EducationPage = () => {
                             <div className="bg-white rounded-3xl shadow-2xl p-8 border border-amber-100 mb-8">
                                 <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/极速赛车开奖结果记录2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 极速赛车开奖结果记录0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </span>
                                     Featured Educational Content
@@ -259,7 +205,7 @@ const EducationPage = () => {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4极速赛车开奖结果记录h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
                                         </svg>
                                     </span>
                                     Categories
@@ -337,7 +283,7 @@ const EducationPage = () => {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8极速赛车开奖结果记录m0-8l-8 8-4-4-6 6"></path>
                                         </svg>
                                     </span>
                                     Popular News
@@ -368,4 +314,4 @@ const EducationPage = () => {
     );
 };
 
-export default EducationPage;
+export default ResourcesCenterPage;
