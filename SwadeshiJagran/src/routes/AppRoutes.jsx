@@ -23,6 +23,13 @@ import EditorialPage from "../pages/EditorialPage";
 import Photos from "../pages/Photos";
 import Books from "../pages/Books";
 import Videos from "../pages/Videos";
+import Monograph from "../pages/Monograph";
+import EditorialBoardPage from "../pages/EditorialBoardPage";
+import AimAndScope from "../pages/AimAndScope";
+import SubmissionPublication from "../pages/SubmissionPublication";
+import CurrentIssue from "../pages/CurrentIssue";
+import AboutUsPage from "../pages/AboutUsPage";
+import BlogPage from "../pages/BlogPage";
 
 const AppRoutes = () => {
   return (
@@ -56,7 +63,13 @@ const AppRoutes = () => {
           <Route path="gallery/photo-gallery" element={<Photos/>}/>
           <Route path="gallery/video-gallery" element={<Videos/>}/>
           <Route path="/publication/books" element={<Books/>}/>
-
+          <Route path="page/about-monograph" element={<Monograph/>}/>
+          <Route path="monograph/editorial-board" element={<EditorialBoardPage/>}/>
+          <Route path="page/aim-scope" element={<AimAndScope/>}/>
+          <Route path="/monograph/submission-publication" element={<SubmissionPublication/>}/>
+          <Route path="/monograph/current-issue" element={<CurrentIssue/>}/>
+          <Route path="about" element={<AboutUsPage/>}/>
+          <Route path="category/blog" element={<BlogPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

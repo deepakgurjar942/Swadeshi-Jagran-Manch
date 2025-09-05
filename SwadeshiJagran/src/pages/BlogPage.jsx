@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { foodArticles } from '../services/food';
+import { blog } from '../services/blogData';
 import Footer from '../layouts/Footer';
 import { Link } from 'react-router-dom';
 import { categories } from '../services/categories';
@@ -7,7 +7,7 @@ import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
 import { usePagination } from '../hooks/usePagination';
 
-const FoodPage = () => {
+const BlogPage = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [showPlayButton, setShowPlayButton] = useState(true);
     const {
@@ -16,7 +16,7 @@ const FoodPage = () => {
         currentItems,
         paginate,
         getPageNumbers,
-    } = usePagination({ items: foodArticles, itemsPerPage: 6 });
+    } = usePagination({ items: blog, itemsPerPage: 6 });
 
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -31,13 +31,13 @@ const FoodPage = () => {
                     <div className="text-center mb-12 max-w-4xl">
                         <div className="inline-block relative">
                             <h1 className="font-bold text-gray-900 text-4xl sm:text-5xl lg:text-6xl mb-8 relative z-10">
-                                Food Articles
+                                Blog Articles
                             </h1>
                             <div className="absolute left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-amber-600 mt-4 rounded-full"></div>
                             <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-3 w-48 h-1 bg-gradient-to-r from-amber-300 to-transparent rounded-full"></div>
                         </div>
                         <p className="text-xl md:text-2xl text-gray-700 italic font-serif mt-8 leading-relaxed">
-                            Explore insightful articles on food safety, nutrition, and sustainable eating habits curated by experts and activists.
+                            Explore insightful blog articles on the Swadeshi movement, economic independence, and sustainable living curated by thought leaders and activists.
                         </p>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ const FoodPage = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v8"></path>
                                         </svg>
                                     </span>
-                                    Latest Food Articles
+                                    Latest Blog Articles
                                 </h2>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,7 +69,7 @@ const FoodPage = () => {
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
                                                 <div className="absolute top-4 right-4 bg-amber-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                                    Food
+                                                    {article.title}
                                                 </div>
                                             </div>
                                             <div className="p-5">
@@ -108,7 +108,7 @@ const FoodPage = () => {
                                                 className="px-3 py-2 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                             >
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+                                                    <path strokeLinecap="round" strokeLinejoin极速赛车开奖结果记录="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
                                                 </svg>
                                             </button>
 
@@ -149,9 +149,9 @@ const FoodPage = () => {
                             <div className="bg-white rounded-3xl shadow-2xl p-8 border border-amber-100 mb-8">
                                 <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/极速赛车开奖结果记录2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 极速赛车开奖结果记录0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </span>
                                     Featured Educational Content
@@ -205,7 +205,7 @@ const FoodPage = () => {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4极速赛车开奖结果记录h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
                                         </svg>
                                     </span>
                                     Categories
@@ -221,7 +221,7 @@ const FoodPage = () => {
                             </div>
                             {/* latest in print */}
                             <div className="bg-white rounded-3xl shadow-2xl p-6 border border-amber-100">
-                                <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                                  <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
@@ -283,7 +283,7 @@ const FoodPage = () => {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8极速赛车开奖结果记录m0-8l-8 8-4-4-6 6"></path>
                                         </svg>
                                     </span>
                                     Popular News
@@ -314,4 +314,4 @@ const FoodPage = () => {
     );
 };
 
-export default FoodPage;
+export default BlogPage;
