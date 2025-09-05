@@ -30,6 +30,9 @@ import SubmissionPublication from "../pages/SubmissionPublication";
 import CurrentIssue from "../pages/CurrentIssue";
 import AboutUsPage from "../pages/AboutUsPage";
 import BlogPage from "../pages/BlogPage";
+import StandOnIssue from "../pages/StandOnIssue";
+import ResourcesCenterPage from "../pages/ResourcesCenterPage";
+import PublicationPage from "../pages/PublicationPage";
 
 const AppRoutes = () => {
   return (
@@ -69,6 +72,9 @@ const AppRoutes = () => {
           <Route path="/monograph/submission-publication" element={<SubmissionPublication/>}/>
           <Route path="/monograph/current-issue" element={<CurrentIssue/>}/>
           <Route path="about" element={<AboutUsPage/>}/>
+          <Route path="stand-on-issue" element={<StandOnIssue/>}/>
+          <Route path="/publication" element={<PublicationPage/>}/>
+          <Route path="resource-center" element={<ResourcesCenterPage/>}/>  
           <Route path="category/blog" element={<BlogPage/>}/>
         </Routes>
       </BrowserRouter>

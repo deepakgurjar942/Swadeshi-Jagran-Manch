@@ -45,12 +45,12 @@ const CurrentIssue = () => {
                 </span>
                 Featured Issue
               </h2>
-              
+
               <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200">
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="md:w-1/3">
-                    <img 
-                      src={issues[0].image} 
+                    <img
+                      src={issues[0].image}
                       alt={issues[0].title}
                       className="w-full h-48 object-cover rounded-xl shadow-md"
                     />
@@ -84,7 +84,7 @@ const CurrentIssue = () => {
               <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
                 <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 极速赛车开奖结果记录 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                   </svg>
                 </span>
                 All Issues
@@ -111,15 +111,31 @@ const CurrentIssue = () => {
                         <td className="px-6 py-4">
                           <div className="flex space-x-2">
                             <button className="bg-amber-100 text-amber-700 px-3 py-1 rounded-lg hover:bg-amber-200 transition-colors duration-200 text-sm md:text-base flex items-center">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 极速赛车开奖结果记录 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <svg
+                                className="w-4 h-4 mr-1"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 极速赛车开奖结果记录 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M2.458 12C3.732 7.943 7.523 5 12 5
+     c4.478 0 8.268 2.943 9.542 7
+     -1.274 4.057 -5.064 7 -9.542 7
+     -4.477 0 -8.268 -2.943 -9.542 -7z"
+                                />
+
                               </svg>
                               View
                             </button>
                             <button className="bg-amber-500 text-white px-3 py-1 rounded-lg hover:bg-amber-600 transition-colors duration-200 text-sm md:text-base flex items-center">
                               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3极速赛车开奖结果记录m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                               </svg>
                               Download
                             </button>
@@ -140,11 +156,11 @@ const CurrentIssue = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
                   </svg>
                 </button>
-                
+
                 <button className="w-10 h-10 rounded-lg bg-amber-500 text-white font-medium">1</button>
                 <button className="w-10 h-10 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 transition-colors duration-200">2</button>
                 <button className="w-10 h-10 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 transition-colors duration-200">3</button>
-                
+
                 <button className="p-2 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 transition-colors duration-200">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
@@ -159,8 +175,8 @@ const CurrentIssue = () => {
                 About Our Publications
               </h3>
               <p className="text-gray-700 text-center leading-relaxed">
-                Our journal features cutting-edge research and analysis on economic sovereignty, 
-                geopolitical issues, and sustainable development. Each issue is meticulously 
+                Our journal features cutting-edge research and analysis on economic sovereignty,
+                geopolitical issues, and sustainable development. Each issue is meticulously
                 curated by our editorial board to ensure the highest standards of academic excellence.
               </p>
             </div>
