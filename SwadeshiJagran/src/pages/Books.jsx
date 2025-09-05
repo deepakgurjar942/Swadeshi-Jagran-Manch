@@ -90,7 +90,7 @@ const Books = () => {
   };
 
   return (
-    <>
+    <div className='mt-10'>
       <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
         {/* Hero Section */}
         <div className="container-fluid pt-28 pb-12 flex flex-col items-center px-4 sm:px-6 lg:px-12">
@@ -213,7 +213,7 @@ const Books = () => {
         </div>
       </div>
       <Footer/>
-    </>
+    </div>
   );
 };
 

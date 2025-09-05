@@ -39,7 +39,7 @@ const Publication = () => {
             Hindi Patrika
           </Link>
           <Link
-            to="/publications/english-patrika"
+            to="/publication/english-patrika"
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >

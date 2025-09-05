@@ -10,7 +10,7 @@ const Introduction = () => {
     }, [scrollTo]);
   return (
     <>
-      <div className="container-fluid mt-28 flex flex-col items-center px-4 sm:px-6 lg:px-12">
+      <div className="container-fluid mt-36 flex flex-col items-center px-4 sm:px-6 lg:px-12">
         {/* Header Section */}
         <div className="text-center mb-12 max-w-3xl">
           <h1 className="font-bold text-gray-900 text-4xl sm:text-5xl mb-6 relative inline-block">

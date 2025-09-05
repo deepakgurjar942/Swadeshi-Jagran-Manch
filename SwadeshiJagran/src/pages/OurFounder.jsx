@@ -4,7 +4,7 @@ import Footer from '../layouts/Footer'
 const OurFounder = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mt-20 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mt-24 mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">

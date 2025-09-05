@@ -22,7 +22,13 @@ import AllPostPage from "../pages/AllPostPage";
 import EditorialPage from "../pages/EditorialPage";
 import Photos from "../pages/Photos";
 import Books from "../pages/Books";
-import Videos from "../pages/Videos";
+import Videos from "../pages/Videos"; 
+import Monograph from "../pages/Monograph";
+import HindiPatrika from "../pages/HindiPatrika";
+import EnglishPatrika from "../pages/EnglishPatrika";
+import ContactUs from "../pages/ContactUs";
+import ContentPage from "../pages/ContentPage";
+import MembershipForm from "../pages/MembershipForm";
 
 const AppRoutes = () => {
   return (
@@ -56,7 +62,12 @@ const AppRoutes = () => {
           <Route path="gallery/photo-gallery" element={<Photos/>}/>
           <Route path="gallery/video-gallery" element={<Videos/>}/>
           <Route path="/publication/books" element={<Books/>}/>
-
+          <Route path="/page/about-monograph" element={<Monograph/>}/>
+          <Route path="/publication/hindi-patrika" element={<HindiPatrika/>}/>
+          <Route path="/publication/english-patrika" element={<EnglishPatrika/>}/>    
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/content" element={<ContentPage />} />
+          <Route path="/join" element={<MembershipForm />} />
         </Routes>
       </BrowserRouter>
     </div>

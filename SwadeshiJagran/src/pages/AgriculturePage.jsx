@@ -24,7 +24,7 @@ const AgriculturePage = () => {
     };
 
     return (
-        <div className="min-h-screen mt-28 bg-gradient-to-b from-gray-50 to-gray-100">
+        <div className="min-h-screen mt-36 bg-gradient-to-b from-gray-50 to-gray-100">
             {/* Header Section */}
             <section className="max-w-7xl mx-auto px-4 py-12 -mt-10">
                 {/* Section Header */}
