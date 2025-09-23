@@ -1,9 +1,8 @@
-import React from 'react';
 import Footer from '../layouts/Footer';
 
 const Monograph = () => {
   return (
-    <>
+    <div className='mt-6'>
       <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
         {/* Hero Section */}
         <div className="container-fluid pt-32 pb-16 flex flex-col items-center px-4 sm:px-6 lg:px-12">
@@ -200,7 +199,7 @@ const Monograph = () => {
         </div>
       </div>
       <Footer/>
-    </>
+    </div>
   );
 };
 

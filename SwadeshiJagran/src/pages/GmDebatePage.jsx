@@ -25,13 +25,13 @@ const GmDebatePage = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
+            <div className="min-h-screen mt-12 bg-gradient-to-b from-amber-50/20 to-white">
                 {/* Hero Section */}
                 <div className="container-fluid pt-28 pb-12 flex flex-col items-center px-4 sm:px-6 lg:px-12">
                     <div className="text-center mb-12 max-w-4xl">
                         <div className="inline-block relative">
                             <h1 className="font-bold text-gray-900 text-4xl sm:text-5xl lg:text-6xl mb-8 relative z-10">
-                                GmDebate Articles
+                                GM Debate Articles
                             </h1>
                             <div className="absolute left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-amber-500 to-amber-600 mt-4 rounded-full"></div>
                             <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-3 w-48 h-1 bg-gradient-to-r from-amber-300 to-transparent rounded-full"></div>

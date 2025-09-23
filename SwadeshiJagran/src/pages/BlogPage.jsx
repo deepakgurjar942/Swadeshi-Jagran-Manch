@@ -25,7 +25,7 @@ const BlogPage = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
+            <div className="min-h-screen mt-12 bg-gradient-to-b from-amber-50/20 to-white">
                 {/* Hero Section */}
                 <div className="container-fluid pt-28 pb-12 flex flex-col items-center px-4 sm:px-6 lg:px-12">
                     <div className="text-center mb-12 max-w-4xl">
@@ -108,7 +108,7 @@ const BlogPage = () => {
                                                 className="px-3 py-2 rounded-lg border border-amber-200 text-amber-600 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                             >
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin极速赛车开奖结果记录="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
                                                 </svg>
                                             </button>
 
@@ -149,9 +149,9 @@ const BlogPage = () => {
                             <div className="bg-white rounded-3xl shadow-2xl p-8 border border-amber-100 mb-8">
                                 <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/极速赛车开奖结果记录2000/svg">
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 极速赛车开奖结果记录0 9 9 0 0118 0z"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </span>
                                     Featured Educational Content
@@ -205,7 +205,7 @@ const BlogPage = () => {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4极速赛车开奖结果记录h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
                                         </svg>
                                     </span>
                                     Categories
@@ -241,7 +241,7 @@ const BlogPage = () => {
                                             alt="swadeshi print"
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-h极速赛车开奖结果记录over:opacity-100 transition-opacity duration-500 flex items-end">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
                                             <div className="p-5 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                                 <h3 className="text-xl font-bold mb-2">Latest Educational Edition</h3>
                                                 <p className="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -283,7 +283,7 @@ const BlogPage = () => {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
                                     <span className="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8极速赛车开奖结果记录m0-8l-8 8-4-4-6 6"></path>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                                         </svg>
                                     </span>
                                     Popular News

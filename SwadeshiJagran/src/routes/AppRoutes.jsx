@@ -22,15 +22,22 @@ import AllPostPage from "../pages/AllPostPage";
 import EditorialPage from "../pages/EditorialPage";
 import Photos from "../pages/Photos";
 import Books from "../pages/Books";
-import Videos from "../pages/Videos";
+import Videos from "../pages/Videos"; 
 import Monograph from "../pages/Monograph";
-import EditorialBoardPage from "../pages/EditorialBoardPage";
+import HindiPatrika from "../pages/HindiPatrika";
+import EnglishPatrika from "../pages/EnglishPatrika";
+import ContactUs from "../pages/ContactUs";
+import ContentPage from "../pages/ContentPage";
+import MembershipForm from "../pages/MembershipForm";
 import AimAndScope from "../pages/AimAndScope";
 import SubmissionPublication from "../pages/SubmissionPublication";
 import CurrentIssue from "../pages/CurrentIssue";
 import AboutUsPage from "../pages/AboutUsPage";
+import EditorialBoardPage from "../pages/EditorialBoardPage";
 import BlogPage from "../pages/BlogPage";
-
+import StandOnIssue from "../pages/StandOnIssue";
+import ResourcesCenterPage from "../pages/ResourcesCenterPage";
+import PublicationPage from "../pages/PublicationPage";
 const AppRoutes = () => {
   return (
     <div>
@@ -63,12 +70,21 @@ const AppRoutes = () => {
           <Route path="gallery/photo-gallery" element={<Photos/>}/>
           <Route path="gallery/video-gallery" element={<Videos/>}/>
           <Route path="/publication/books" element={<Books/>}/>
+          <Route path="/page/about-monograph" element={<Monograph/>}/>
+          <Route path="/publication/hindi-patrika" element={<HindiPatrika/>}/>
+          <Route path="/publication/english-patrika" element={<EnglishPatrika/>}/>    
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/content" element={<ContentPage />} />
+          <Route path="/join" element={<MembershipForm />} />
           <Route path="page/about-monograph" element={<Monograph/>}/>
           <Route path="monograph/editorial-board" element={<EditorialBoardPage/>}/>
           <Route path="page/aim-scope" element={<AimAndScope/>}/>
           <Route path="/monograph/submission-publication" element={<SubmissionPublication/>}/>
           <Route path="/monograph/current-issue" element={<CurrentIssue/>}/>
           <Route path="about" element={<AboutUsPage/>}/>
+          <Route path="stand-on-issue" element={<StandOnIssue/>}/>
+          <Route path="/publication" element={<PublicationPage/>}/>
+          <Route path="resource-center" element={<ResourcesCenterPage/>}/>  
           <Route path="category/blog" element={<BlogPage/>}/>
         </Routes>
       </BrowserRouter>

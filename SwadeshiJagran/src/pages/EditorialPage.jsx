@@ -25,7 +25,7 @@ const EditorialPage = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
+            <div className="min-h-screen mt-12 bg-gradient-to-b from-amber-50/20 to-white">
                 {/* Hero Section */}
                 <div className="container-fluid pt-28 pb-12 flex flex-col items-center px-4 sm:px-6 lg:px-12">
                     <div className="text-center mb-12 max-w-4xl">
