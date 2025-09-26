@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
-import { categories } from '../services/categories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
-import { slides} from '../services/slides';
+import { slides } from '../services/slides';
 import { agriculture } from '../services/agriculture';
 import { gmDebate } from '../services/gmDebate';
 import { destinations } from '../services/destinations';
 
 import Footer from "../layouts/Footer";
+import { useCategories } from "../services/useCategories";
+import Store from "./Store";
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentDestination, setCurrentDestination] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
+  const { categories, loading, error } = useCategories();
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -150,8 +152,8 @@ const HomePage = () => {
               <div
                 key={index}
                 className={`relative h-24 md:h-60 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 transform ${currentDestination === index
-                    ? " scale-105 shadow-xl"
-                    : "opacity-90 hover:opacity-100 hover:scale-102 hover:shadow-lg"
+                  ? " scale-105 shadow-xl"
+                  : "opacity-90 hover:opacity-100 hover:scale-102 hover:shadow-lg"
                   }`}
                 onClick={() => goToDestination(index)}
               >
@@ -292,7 +294,7 @@ const HomePage = () => {
 
         {/* Articles List - 2-column layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-          {gmDebate.slice(0,4).map((item, idx) => (
+          {gmDebate.slice(0, 4).map((item, idx) => (
             <div
               key={idx}
               className="group flex flex-col md:flex-row items-start gap-6 p-6 rounded-2xl bg-white border border-amber-100/60 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1.5"
@@ -337,26 +339,26 @@ const HomePage = () => {
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-3 rounded-full"></div>
         </div>
 
-        {/* Grid Layout with 4 columns */}
+        {/* Grid Layout with 4 columns - Limited to 12 categories */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
-          {categories.map((cat, idx) => (
+          {categories.slice(5, 17).map((cat) => (
             <div
-              key={idx}
+              key={cat.id}
               className="group flex flex-col items-center p-5 rounded-xl bg-gradient-to-b from-white to-gray-50 border border-gray-100 hover:border-transparent shadow-sm hover:shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1"
             >
               {/* Image Container with subtle gradient border */}
               <div className="relative mb-4">
                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"></div>
                 <img
-                  src={cat.img}
-                  alt={cat.title}
+                  src={cat.image_full_url}
+                  alt={cat.name}
                   className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white relative z-10 shadow-md group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
 
               {/* Category Title */}
               <span className="text-gray-700 font-semibold text-sm md:text-base text-center group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
-                {cat.title}
+                {cat.name}
               </span>
 
               {/* Subtle hover indicator */}
@@ -366,15 +368,18 @@ const HomePage = () => {
         </div>
 
         {/* View All Button */}
-        {/* <div className="text-center mt-8">
-    <button className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md hover:shadow-lg">
-      View All Categories
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
-    </button>
-  </div> */}
+        <div className="text-center mt-8">
+          <button className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md hover:shadow-lg">
+            View All Categories
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
+        </div>
       </section>
+      {/* Stores */}
+
+          <Store/>
 
       {/* Recent News section */}
 

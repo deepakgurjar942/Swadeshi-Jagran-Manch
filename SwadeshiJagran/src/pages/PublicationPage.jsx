@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { publications } from '../services/publication';
 import Footer from '../layouts/Footer';
 import { Link } from 'react-router-dom';
-import { categories } from '../services/categories';
+import { useCategories } from '../services/useCategories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
 import { usePagination } from '../hooks/usePagination';
@@ -10,6 +10,7 @@ import { usePagination } from '../hooks/usePagination';
 const PublicationPage = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [showPlayButton, setShowPlayButton] = useState(true);
+    const { categories, loading, error } = useCategories();
     const {
         currentPage,
         totalPages,
@@ -25,7 +26,7 @@ const PublicationPage = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-amber-50/20 to-white">
+            <div className="min-h-screen mt-6 bg-gradient-to-b from-amber-50/20 to-white">
                 {/* Hero Section */}
                 <div className="container-fluid pt-28 pb-12 flex flex-col items-center px-4 sm:px-6 lg:px-12">
                     <div className="text-center mb-12 max-w-4xl">
@@ -210,14 +211,14 @@ const PublicationPage = () => {
                                     </span>
                                     Categories
                                 </h2>
-                                <div className="space-y-3">
-                                    {categories.map((cat, idx) => (
-                                        <div key={idx} className="flex items-center p-3 rounded-lg hover:bg-amber-50 transition-colors duration-200 cursor-pointer group">
-                                            <img src={cat.img} alt={cat.title} className="w-8 h-8 rounded-full object-cover mr-3" />
-                                            <span className="text-gray-700 group-hover:text-amber-600 transition-colors">{cat.title}</span>
-                                        </div>
-                                    ))}
-                                </div>
+                               <div className="space-y-3">
+                                        {categories.slice(5, 17).map((cat) => (
+                                            <div key={cat.id} className="flex items-center p-3 rounded-lg hover:bg-amber-50 transition-colors duration-200 cursor-pointer group">
+                                                <img src={cat.image_full_url} alt={cat.name} className="w-8 h-8 rounded-full object-cover mr-3" />
+                                                <span className="text-gray-700 group-hover:text-amber-600 transition-colors">{cat.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                             </div>
                             {/* latest in print */}
                             <div className="bg-white rounded-3xl shadow-2xl p-6 border border-amber-100">

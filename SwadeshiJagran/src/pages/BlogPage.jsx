@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { blog } from '../services/blogData';
 import Footer from '../layouts/Footer';
 import { Link } from 'react-router-dom';
-import { categories } from '../services/categories';
+import { useCategories } from '../services/useCategories';
 import { recentNews } from '../services/recentNews';
 import { popularNews } from '../services/popularNews';
 import { usePagination } from '../hooks/usePagination';
@@ -17,6 +17,7 @@ const BlogPage = () => {
         paginate,
         getPageNumbers,
     } = usePagination({ items: blog, itemsPerPage: 6 });
+    const { categories, loading, error } = useCategories();
 
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -211,13 +212,13 @@ const BlogPage = () => {
                                     Categories
                                 </h2>
                                 <div className="space-y-3">
-                                    {categories.map((cat, idx) => (
-                                        <div key={idx} className="flex items-center p-3 rounded-lg hover:bg-amber-50 transition-colors duration-200 cursor-pointer group">
-                                            <img src={cat.img} alt={cat.title} className="w-8 h-8 rounded-full object-cover mr-3" />
-                                            <span className="text-gray-700 group-hover:text-amber-600 transition-colors">{cat.title}</span>
-                                        </div>
-                                    ))}
-                                </div>
+                                        {categories.slice(5, 17).map((cat) => (
+                                            <div key={cat.id} className="flex items-center p-3 rounded-lg hover:bg-amber-50 transition-colors duration-200 cursor-pointer group">
+                                                <img src={cat.image_full_url} alt={cat.name} className="w-8 h-8 rounded-full object-cover mr-3" />
+                                                <span className="text-gray-700 group-hover:text-amber-600 transition-colors">{cat.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                             </div>
                             {/* latest in print */}
                             <div className="bg-white rounded-3xl shadow-2xl p-6 border border-amber-100">

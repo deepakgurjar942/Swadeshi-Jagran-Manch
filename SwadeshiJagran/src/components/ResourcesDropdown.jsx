@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa";
 
 const ResourcesDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const location = useLocation();
   return (
     <div
       className="relative group"
@@ -13,7 +13,18 @@ const ResourcesDropdown = () => {
     >
       <Link
         to="/resource-center"
-        className="px-4 py-2 text-gray-100 hover:text-indiaSaffron transition-colors duration-200 text-sm font-medium flex items-center space-x-1"
+        className={`px-4 py-2 rounded-full text-gray-100 hover:text-indiaSaffron transition-colors duration-200 text-sm font-medium flex items-center space-x-1 ${
+                location.pathname === "/resource-center" ||
+                location.pathname.startsWith("/category/national-events") ||
+                location.pathname.startsWith("/category/sb-abhiyan") ||
+                location.pathname.startsWith("/category/resolution") ||
+                location.pathname.startsWith("/category/press-releases") ||
+                location.pathname.startsWith("/category/news-wire") ||
+                location.pathname.startsWith("/allpost") ||
+                location.pathname.startsWith("/category/editorial")
+                  ? "text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg"
+                  : "text-gray-300 hover:text-white hover:bg-amber-500/20"
+              } `}
       >
         <span>Resources Center</span>
         <FaCaretDown

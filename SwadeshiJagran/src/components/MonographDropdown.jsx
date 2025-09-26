@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa";
 
 const Monograph = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const location = useLocation();
   return (
     <div
       className="relative group"
@@ -12,7 +12,16 @@ const Monograph = () => {
       onMouseLeave={() => setIsOpen(false)}
     >
       <Link
-        className="px-4 py-2 text-gray-100 hover:text-indiaSaffron transition-colors duration-200 text-sm font-medium flex items-center space-x-1"
+        className={`px-4 py-2 rounded-full text-gray-100 hover:text-indiaSaffron transition-colors duration-200 text-sm font-medium flex items-center space-x-1 ${
+                location.pathname === "/monograph" ||
+                location.pathname.startsWith("/page/about-monograph") ||
+                location.pathname.startsWith("/monograph/editorial-board") || 
+                location.pathname.startsWith("/page/aim-scope") ||
+                location.pathname.startsWith("/monograph/submission-publication") ||
+                location.pathname.startsWith("/monograph/current-issue")
+                  ? "text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg"
+                  : "text-gray-300 hover:text-white hover:bg-amber-500/20"
+              } `}
       >
         <span> Monograph</span>
         <FaCaretDown

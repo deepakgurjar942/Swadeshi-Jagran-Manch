@@ -12,6 +12,7 @@
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/vite": "^4.1.12",
+    "axios": "^1.12.2",
     "dom": "^0.0.3",
     "lucide-react": "^0.542.0",
     "react": "^19.1.1",
